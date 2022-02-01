@@ -17,10 +17,10 @@
   <script src="../ext/drawingboard.script.js"></script>
   <script src="../ext/quill.js"></script>
 
-  <title>SketchNote</title>
+  <title>Vnote</title>
 </head>
 
-<body>
+<body style="background-color: #9DC3C2;">
   <div class="wrap">
     <div>
       <button type="button" class="btn" id="download-button">
@@ -46,15 +46,15 @@
 
     <div class="left-column">
 
-      <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-        <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-          <svg class="bi me-2" width="30" height="24">
+      <div class="d-flex flex-column align-items-stretch flex-shrink-0" style="background-color: #B3D89C;">
+        <a class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none">
+          <svg class="bi me-2" width="30" height="10">
             <use xlink:href="#bootstrap" />
           </svg>
-          <span class="fs-5 fw-semibold">Your Notes</span>
+          <span class="fs-5 fw-semibold">Notes</span>
           <button id="create-note-button" onclick="onCreateNote()" type="button" class="btn btn-success">+</button>
         </a>
-        <div class="list-group list-group-flush border-bottom scrollarea" id="note-section"></div>
+        <div class="list-group list-group-flush scrollarea" id="note-section"></div>
       </div>
     </div>
 

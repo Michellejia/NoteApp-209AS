@@ -18,7 +18,7 @@ window.onload = async () => {
       toolbar: [
         [{ header: [1, 2, 3, false] }],
         ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block', 'image', 'video', 'formula']
+        ['blockquote', 'code-block', 'image', 'formula']
       ]
     },
     placeholder: 'Write something here...',
@@ -179,7 +179,7 @@ renderNotes = () => {
   if (!activeKey && keys.length > 0)
     activeKey = keys[0];
   if (!keys.length) {
-    content = `<p>Looks like you have not created any notes. Click on the + button to get started.</p>`;
+    content = `<p> Click on the + to create your first note!</p>`;
   }
   for (i = 0; i < keys.length; i++) {
     key = keys[i];

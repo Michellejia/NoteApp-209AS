@@ -24,6 +24,7 @@
 .left-column {
   padding: 5px; 
   flex: 40%;
+  margin-left: 15px;
 }
 
 #create-note-button {
@@ -32,12 +33,15 @@
 
 #quill-editor {
   display: block;
+  /* background-color: #77A6B6; */
 }
 
 #quill-border {
   position:relative;
-  margin-top:5em;
-  border:solid 1px black;
+  margin-top:2em;
+  border:solid 2px #77A6B6 !important;
+  border-radius:10px;
+  /* box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25) !important; */
 }
 
 #editor-container {
@@ -49,9 +53,10 @@
 }
 
 #drawingCanvas {
-  height: 510px; 
-  width: 440px; 
+  height: 450px; 
+  width: 490px; 
   display: none;
+  border:solid 2px #77A6B6;
 }
 
 #editor {
@@ -123,6 +128,7 @@ image-rendering: optimizeQuality;
 }
 
 #download-color {
+margin-left: 650px;
 color: rgb(22, 72, 105);
 }
 

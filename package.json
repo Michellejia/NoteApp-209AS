@@ -1,9 +1,9 @@
 {
-  "name": "sketchnote",
+  "name": "Vnote",
   "version": "1.0.0",
   "description": "take notes and make drawings with embed and latex support.",
   "main": "main.js",
-  "productName": "SketchNote",
+  "productName": "Vnote",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
