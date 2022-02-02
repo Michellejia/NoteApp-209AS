@@ -27,4 +27,4 @@ electron-packager is used to package and build the app.
 - [KaTeX](https://github.com/KaTeX/KaTeX)
 - Bootstrap
 ---
-![](https://github.com/iammanish17/SketchNote/blob/main/ss.gif?raw=true)
+<!-- ![](https://github.com/iammanish17/SketchNote/blob/main/ss.gif?raw=true) -->
