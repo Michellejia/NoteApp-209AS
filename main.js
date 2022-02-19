@@ -26,6 +26,7 @@ function createWindow() {
         resizable: true,
         show: false
     })
+    // win.webContents.openDevTools();
     splash = new BrowserWindow({ width: 600, height: 350, frame: false, transparent: true, alwaysOnTop: true, icon: __dirname + '/icon.png' })
     // splash.loadFile(__dirname + '/renderer/splash.html')
     win.loadFile(__dirname + '/renderer/index.html')

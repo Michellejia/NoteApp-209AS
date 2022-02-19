@@ -208,6 +208,7 @@ renderNotes = () => {
 }
 
 onCreateNote = () => {
+  console.log("onCreateNote");
   var noteID = new Date().getTime().toString();
   db.set(noteID,
     {
