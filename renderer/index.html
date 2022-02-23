@@ -14,6 +14,10 @@
         rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
         crossorigin="anonymous"/>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose"></script>
   <script defer src="../ext/katex.min.js" crossorigin="anonymous"></script>
 
   <script type="text/javascript" src="../ext/jquery-1.7.2.min.js"></script>
@@ -80,6 +84,8 @@
 
           <div id="drawingCanvas"></div>
 
+          <button type="button" onclick="classifyToxicity();">Click to classify toxicity</button>
+
           <div class="mt-4" id="div_language">
             <h2 class="mb-3 text-light">Select Language</h2>
             <select class="form-select bg-secondary text-light" id="select_language" onchange="updateCountry()"></select>
@@ -119,7 +125,8 @@
 
                             req.onload = function(e) {
                               if(this.readyState === 4) {
-                                document.getElementById("transcript").innerHTML = req.response;
+                                document.getElementById("transcript").innerHTML += " ";
+                                document.getElementById("transcript").innerHTML += req.response;
                               }
                             }
 
@@ -140,56 +147,6 @@
 
     </div>
   </div>
-
-
-
-  <script>
-    // const downloadLink = document.getElementById('download');
-    // const stopButton = document.getElementById('stop');
-    // const player = document.getElementById('player');
-    // console.log("?1");
-    // let stop1f;
-    //
-    // function stop1() {
-    //   console.log("stop1");
-    //   stop1f();
-    //   console.log("stop2")
-    // }
-    //
-    // const handleSuccess = function(stream) {
-    //   const options = {mimeType: 'audio/webm'};
-    //   const recordedChunks = [];
-    //   const mediaRecorder = new MediaRecorder(stream, options);
-    //
-    //   console.log("?2");
-    //   mediaRecorder.addEventListener('dataavailable', function(e) {
-    //     if (e.data.size > 0) recordedChunks.push(e.data);
-    //   });
-    //
-    //   mediaRecorder.addEventListener('stop1', function() {
-    //     downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-    //     player.src = downloadLink.href;
-    //     downloadLink.download = 'acetest.wav';
-    //   });
-    //   stop1f = () => {
-    //     downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-    //     player.src = downloadLink.href;
-    //     downloadLink.download = 'acetest.wav';
-    //   }
-    //
-    //   stopButton.addEventListener('click', function() {
-    //     mediaRecorder.stop();
-    //   });
-    //
-    //   console.log("?3");
-    //   mediaRecorder.start();
-    //   console.log("?4");
-    // };
-    //
-    // navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-    //         .then(handleSuccess);
-
-  </script>
 
   <script src="../ext/drawingboard.min.js"></script>
   <script src="./script.js"></script>

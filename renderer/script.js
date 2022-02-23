@@ -1,4 +1,5 @@
 var Store = require('electron-store');
+const toxicity = require('@tensorflow-models/toxicity');
 var db = new Store();
 var drawingSection = document.getElementById("drawingSection");
 var noteSection = document.getElementById("note-section");
@@ -10,6 +11,7 @@ var pageAnchor = document.getElementById("page-number-display");
 var downloadButton = document.getElementById("download-button");
 var wrapper;
 var board, quill, activeKey, editKey, activePage = 1, toggle = 0;
+var globalVar;
 
 window.onload = async () => {
 
@@ -224,6 +226,46 @@ onCreateNote = () => {
   renderNotes();
 }
 
+classifyToxicity = () => {
+  console.log("classifyToxicity");
+  // The minimum prediction confidence.
+  const threshold = 0.9;
+
+  // Load the model. Users optionally pass in a threshold and an array of
+  // labels to include.
+  toxicity.load(threshold).then(model => {
+    globalVar = quill.root.innerHTML.substring(3, quill.root.innerHTML.length-4);
+    const sentences = [globalVar];
+
+    model.classify(sentences).then(predictions => {
+      // `predictions` is an array of objects, one for each prediction head,
+      // that contains the raw probabilities for each input along with the
+      // final prediction in `match` (either `true` or `false`).
+      // If neither prediction exceeds the threshold, `match` is `null`.
+
+      console.log(predictions);
+      /*
+      prints:
+      {
+        "label": "identity_attack",
+        "results": [{
+          "probabilities": [0.9659664034843445, 0.03403361141681671],
+          "match": false
+        }]
+      },
+      {
+        "label": "insult",
+        "results": [{
+          "probabilities": [0.08124706149101257, 0.9187529683113098],
+          "match": true
+        }]
+      },
+      ...
+      */
+    });
+  });
+}
+
 modeToggleButton.onclick = () => {
   if (toggle === 0) {
     modeToggleButton.innerHTML = modeToggleButton.innerHTML.replace('toggle-off', 'toggle-on');
@@ -269,6 +311,9 @@ downloadButton.onclick = () => {
   doc.hidden = true;
   document.body.appendChild(doc);
   doc.click();
+
+  console.log(quill.root.innerHTML);
+  // save_content = quill.root.innerHTML;
 }
 
 setInterval(updateNote, 1000);
