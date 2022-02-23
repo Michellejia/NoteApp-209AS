@@ -1,0 +1,7 @@
+export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/note-backend-342206-bdade024d288.json
+
+cd backend
+npm start
+
+<new terminal>
+npm start

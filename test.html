@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>capture microphone then show time & frequency domain output</title>
+</head>
+<body>
+
+<a id="download">Download</a>
+<button id="stop">Stop</button>
+
+<input type="file" accept="audio/*" capture id="recorder">
+<audio id="player" controls></audio>
+
+<script>
+    const downloadLink = document.getElementById('download');
+    const stopButton = document.getElementById('stop');
+    const player = document.getElementById('player');
+
+    const handleSuccess = function(stream) {
+        const options = {mimeType: 'audio/webm'};
+        const recordedChunks = [];
+        const mediaRecorder = new MediaRecorder(stream, options);
+
+        mediaRecorder.addEventListener('dataavailable', function(e) {
+            if (e.data.size > 0) recordedChunks.push(e.data);
+        });
+
+        mediaRecorder.addEventListener('stop', function() {
+            downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+            player.src = downloadLink.href;
+            downloadLink.download = 'acetest.wav';
+        });
+
+        stopButton.addEventListener('click', function() {
+            mediaRecorder.stop();
+        });
+
+        mediaRecorder.start();
+    };
+
+    navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+        .then(handleSuccess);
+
+</script>
+
+</body>
+</html>

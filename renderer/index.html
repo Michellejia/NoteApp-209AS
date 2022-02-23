@@ -25,7 +25,7 @@
 </head>
 
 <body style="background-color: #EFEBCE;">
-  <div class="wrap">
+<div class="wrap">
     <div>
       <button type="button" class="btn" id="download-button">
         <span id=download-color><i class="fa fa-download fa-2x" aria-hidden="true"></i></span>
@@ -89,17 +89,108 @@
           <div class="p-3" style="border: 1px solid gray; height: 300px; border-radius: 8px;">
             <span id="final" class="text-light"></span>
             <span id="interim" class="text-secondary"></span>
+            <p id="transcript"></p>
           </div>
           <div class="mt-4">
-            <button class="btn btn-success" id="start">Start</button>
-            <button class="btn btn-danger" id="stop">Stop</button>
-            <p id="status" class="lead mt-3 text-light" style="display: none">Listening ...</p>
+            <button class="btn btn-success" id="start" onclick="startRecord()">Start</button>
+            <button class="btn btn-danger" id="stop" onclick="stopRecord()">Stop</button>
+
+            <video autoplay></video>
+            <script type = "text/javascript">
+              let mediaRecorder;
+
+              function startRecord() {
+                mediaRecorder.start();
+              }
+
+              function stopRecord() {
+                mediaRecorder.stop();
+                initRecord();
+              }
+
+              function initRecord() {
+                navigator.mediaDevices.getUserMedia({video: false, audio: true}).then(
+                        (localMediaStream) => {
+                          const options = {mimeType: 'audio/webm'};
+                          const recordedChunks = [];
+                          mediaRecorder = new MediaRecorder(localMediaStream, options);
+                          mediaRecorder.addEventListener('dataavailable', function(e) {
+                            let req = new XMLHttpRequest();
+
+                            req.onload = function(e) {
+                              if(this.readyState === 4) {
+                                document.getElementById("transcript").innerHTML = req.response;
+                              }
+                            }
+
+                            req.open("POST", "http://localhost:8080", true);
+                            req.send(new Blob([e.data]));
+
+                            if (e.data.size > 0) recordedChunks.push(e.data);
+                          });
+                        }
+                );
+              }
+
+              initRecord()
+            </script>
           </div>
         </div>
       </div>
 
     </div>
   </div>
+
+
+
+  <script>
+    // const downloadLink = document.getElementById('download');
+    // const stopButton = document.getElementById('stop');
+    // const player = document.getElementById('player');
+    // console.log("?1");
+    // let stop1f;
+    //
+    // function stop1() {
+    //   console.log("stop1");
+    //   stop1f();
+    //   console.log("stop2")
+    // }
+    //
+    // const handleSuccess = function(stream) {
+    //   const options = {mimeType: 'audio/webm'};
+    //   const recordedChunks = [];
+    //   const mediaRecorder = new MediaRecorder(stream, options);
+    //
+    //   console.log("?2");
+    //   mediaRecorder.addEventListener('dataavailable', function(e) {
+    //     if (e.data.size > 0) recordedChunks.push(e.data);
+    //   });
+    //
+    //   mediaRecorder.addEventListener('stop1', function() {
+    //     downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+    //     player.src = downloadLink.href;
+    //     downloadLink.download = 'acetest.wav';
+    //   });
+    //   stop1f = () => {
+    //     downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+    //     player.src = downloadLink.href;
+    //     downloadLink.download = 'acetest.wav';
+    //   }
+    //
+    //   stopButton.addEventListener('click', function() {
+    //     mediaRecorder.stop();
+    //   });
+    //
+    //   console.log("?3");
+    //   mediaRecorder.start();
+    //   console.log("?4");
+    // };
+    //
+    // navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+    //         .then(handleSuccess);
+
+  </script>
+
   <script src="../ext/drawingboard.min.js"></script>
   <script src="./script.js"></script>
   <script src="../ext/bootstrap.bundle.min.js"></script>
