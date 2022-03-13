@@ -1,5 +1,5 @@
-linux: export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/note-backend-342206-bdade024d288.json
-window: $env:GOOGLE_APPLICATION_CREDENTIALS="E:\UCLA\Winter 2022\EE 209AS Human Computer Interaction\Project\NoteApp-209AS\note-backend-342206-bdade024d288.json"
+linux: export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/ece209finalproject-59031b57eef1.json
+window: $env:GOOGLE_APPLICATION_CREDENTIALS="E:\UCLA\Winter 2022\EE 209AS Human Computer Interaction\Project\209project\ece209finalproject-59031b57eef1.json"
 
 npm install @tensorflow/tfjs @tensorflow-models/toxicity
 

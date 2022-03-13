@@ -22,7 +22,7 @@
   "dependencies": {
     "@google-cloud/speech": "^4.10.0",
     "@tensorflow-models/toxicity": "^1.2.2",
-    "@tensorflow/tfjs": "^3.13.0",
+    "@tensorflow/tfjs": "^3.14.0",
     "electron-store": "^8.0.1",
     "express": "^4.17.3",
     "lodash": "^4.17.21",
